@@ -11,7 +11,7 @@ const RestaurantInfo = ({ refresh, restaurant }) => {
         setError("")
         try {
             setLoading(true)
-            await axios.patch(`http://localhost:5000/api/restaurants/${restaurant._id}/toggleStatus`, {}, { withCredentials: true })
+            await axios.patch(`${process.env.NEXT_PUBLIC_API_URL}/api/restaurants/${restaurant._id}/toggleStatus`, {}, { withCredentials: true })
             refresh();
 
         } catch (error) {

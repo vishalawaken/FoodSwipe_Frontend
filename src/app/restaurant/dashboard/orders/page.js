@@ -30,7 +30,7 @@ const RestaurantOrderPage = () => {
     useEffect(() => {
         const fetchMyRestaurant = async () => {
             try {
-                const res = await axios.get("http://localhost:5000/api/restaurants/myRestaurant", { withCredentials: true })
+                const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/restaurants/myRestaurant`, { withCredentials: true })
                 if (res.data.restaurant) {
                     setRestaurantId(res.data.restaurant._id);
                 }
@@ -47,7 +47,7 @@ const RestaurantOrderPage = () => {
         if (!restaurantId) return;
 
         try {
-            const res = await axios.get(`http://localhost:5000/api/order/restaurant/${restaurantId}`,
+            const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/order/restaurant/${restaurantId}`,
                 { withCredentials: true })
             const newOrders = res.data.orders || [];
 
@@ -75,7 +75,7 @@ const RestaurantOrderPage = () => {
 
     const updateStatus = async (orderId, status) => {
         try {
-            await axios.patch(`http://localhost:5000/api/order/${orderId}/status`,
+            await axios.patch(`${process.env.NEXT_PUBLIC_API_URL}/api/order/${orderId}/status`,
                 { status },
                 { withCredentials: true })
             fetchOrders();

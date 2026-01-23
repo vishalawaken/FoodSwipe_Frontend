@@ -3,7 +3,7 @@ import axios from "axios"
 const Homepage = async () => {
   let restaurants = []
   try {
-    const res = await axios.get("http://localhost:5000/api/restaurants", { withCredentials: true })
+    const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/restaurants`, { withCredentials: true })
     restaurants = res.data.restaurants || [];
   } catch (error) {
     console.error("Error fetching restaurants", error)

@@ -7,7 +7,7 @@ const RestaurantMenuPage = async ({ params }) => {
 
     try {
         const res = await axios.get(
-            `http://localhost:5000/api/menu/restaurant/${id}`,
+            `${process.env.NEXT_PUBLIC_API_URL}/api/menu/restaurant/${id}`,
             { withCredentials: true }
         );
         menuItems = res.data.items || [];

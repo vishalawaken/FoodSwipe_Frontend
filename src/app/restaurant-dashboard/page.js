@@ -18,7 +18,7 @@ const RestaurantDashboard = () => {
         try {
             setLoading(true);
             setError(null);
-            const res = await axios.get("http://localhost:5000/api/restaurants/myRestaurant", { withCredentials: true })
+            const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/restaurants/myRestaurant`, { withCredentials: true })
             setRestaurant(res.data.restaurant);
         } catch (error) {
             // 404 means no restaurant yet - not an error, show create form

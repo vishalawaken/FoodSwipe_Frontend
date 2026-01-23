@@ -21,7 +21,7 @@ const Header = () => {
     const fetchUser = async () => {
         try {
             setLoading(true)
-            const res = await axios.get("http://localhost:5000/api/auth/me", { withCredentials: true })
+            const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/auth/me`, { withCredentials: true })
             setUser(res.data.user)
         } catch (error) {
             console.error("Error Fetching User", error)
@@ -35,7 +35,7 @@ const Header = () => {
     const fetchCartCount = useCallback(async () => {
         try {
             const res = await axios.get(
-                "http://localhost:5000/api/cart",
+                `${process.env.NEXT_PUBLIC_API_URL}/api/cart`,
                 { withCredentials: true }
             );
 
@@ -73,7 +73,7 @@ const Header = () => {
 
     async function handleLogout() {
         try {
-            await axios.post("http://localhost:5000/api/auth/logout", {}, { withCredentials: true })
+            await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/auth/logout`, {}, { withCredentials: true })
             setUser(null);
             dispatch(resetCart());
             router.push("/login")

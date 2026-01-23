@@ -29,7 +29,7 @@ const CartPage = () => {
     const fetchCart = async () => {
         try {
             setLoading(true);
-            const res = await axios.get("http://localhost:5000/api/cart", { withCredentials: true });
+            const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/cart`, { withCredentials: true });
             setCart(res.data.cart);
             updateReduxCartCount(res.data.cart);
         } catch (error) {
@@ -48,7 +48,7 @@ const CartPage = () => {
     // RemoveItem from the cart
     const removeItem = async (menuItemId) => {
         try {
-            await axios.delete(`http://localhost:5000/api/cart/remove/${menuItemId}`, { withCredentials: true });
+            await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/api/cart/remove/${menuItemId}`, { withCredentials: true });
             fetchCart();
         } catch (error) {
             alert("failed to clear Item  form the Cart")
@@ -58,7 +58,7 @@ const CartPage = () => {
     // Clear Cart
     const clearCart = async () => {
         try {
-            await axios.delete("http://localhost:5000/api/cart/clear", { withCredentials: true });
+            await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/api/cart/clear`, { withCredentials: true });
             setCart(null);
             dispatch(resetCart());
         } catch (error) {
@@ -100,7 +100,7 @@ const CartPage = () => {
 
         try {
             await axios.patch(
-                `http://localhost:5000/api/cart/update/${menuItemId}`,
+                `${process.env.NEXT_PUBLIC_API_URL}/api/cart/update/${menuItemId}`,
                 { quantity: newQuantity },
                 { withCredentials: true }
             );
@@ -117,7 +117,7 @@ const CartPage = () => {
     const handlePlaceOrder = async () => {
         try {
             await axios.post(
-                "http://localhost:5000/api/order/place",
+                `${process.env.NEXT_PUBLIC_API_URL}/api/order/place`,
                 {},
                 { withCredentials: true }
             );

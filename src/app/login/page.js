@@ -23,10 +23,10 @@ const LoginPage = () => {
         }
         try {
             setLoading(true);
-            await axios.post("http://localhost:5000/api/auth/login", { email, password }, { withCredentials: true })
+            await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/auth/login`, { email, password }, { withCredentials: true })
 
             // Fetch user data to get role
-            const userRes = await axios.get("http://localhost:5000/api/auth/me", { withCredentials: true })
+            const userRes = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/auth/me`, { withCredentials: true })
             const user = userRes.data.user;
 
             // Role-based redirect

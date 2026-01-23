@@ -18,7 +18,7 @@ const MenuManagementPage = ({ params }) => {
         try {
             setLoading(true);
             // Use owner-specific endpoint to get ALL items (available + disabled)
-            const res = await axios.get(`http://localhost:5000/api/menu/my-restaurant/${restaurantId}`, { withCredentials: true })
+            const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/menu/my-restaurant/${restaurantId}`, { withCredentials: true })
             setMenuItems(res.data.items || [])
         } catch (error) {
             setError("Failed to load menu")
@@ -41,7 +41,7 @@ const MenuManagementPage = ({ params }) => {
             return;
         }
         try {
-            await axios.post(`http://localhost:5000/api/menu/restaurant/${restaurantId}`, { name, price, description }, { withCredentials: true })
+            await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/menu/restaurant/${restaurantId}`, { name, price, description }, { withCredentials: true })
 
             // reset form
             setName("");
@@ -58,7 +58,7 @@ const MenuManagementPage = ({ params }) => {
     // Toggle availability
     const toggleAvailability = async (itemId) => {
         try {
-            await axios.patch(`http://localhost:5000/api/menu/${itemId}/toggleAvailability`, {}, { withCredentials: true })
+            await axios.patch(`${process.env.NEXT_PUBLIC_API_URL}/api/menu/${itemId}/toggleAvailability`, {}, { withCredentials: true })
             fetchMenu();
         } catch (error) {
             alert("failed to update item status")

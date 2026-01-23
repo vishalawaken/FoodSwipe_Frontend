@@ -25,7 +25,7 @@ export async function middleware(req) {
   // 🔐 backend auth check
   try {
     const res = await fetch(
-      "http://localhost:5000/api/auth/me",
+      `${process.env.NEXT_PUBLIC_API_URL}/api/auth/me`,
       {
         headers: {
           cookie: req.headers.get("cookie") || "",
