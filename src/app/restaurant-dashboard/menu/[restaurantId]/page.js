@@ -75,14 +75,14 @@ const MenuManagementPage = ({ params }) => {
                 <h1 className="mb-6 text-2xl font-bold">Menu Management</h1>
 
                 {/* Add Item Form */}
-                <div className="mb-8 rounded-lg border bg-white p-6 shadow">
+                <div className="mb-8 rounded-lg border border-amber-300 hover:border-amber-400 bg-white p-6 shadow">
                     <h2 className="mb-4 text-lg font-semibold">Add Menu Item</h2>
                     {error && (<p className="mb-4 text-sm text-red-600">{error}</p>)}
                     <form className="grid gap-4 sm:grid-cols-3" onSubmit={handleAddItem}>
-                        <input type="text" placeholder="Item Name" value={name} onChange={(e) => { setName(e.target.value) }}></input>
+                        <input type="text" placeholder="Item Name" value={name} onChange={(e) => { setName(e.target.value) }} className="rounded border px-3 py-2"></input>
                         <input type="number" placeholder="Price" value={price} onChange={(e) => { setPrice(e.target.value) }} className="rounded border px-3 py-2"></input>
                         <input type="text" placeholder="Descripition (optional)" value={description} onChange={(e) => { setDescription(e.target.value) }} className="rounded border px-3 py-2"></input>
-                        <button type="submit" className="col-span-full rounded bg-green-600 py-2 text-white hover:bg-screen-700">Add Item</button>
+                        <button type="submit" className="col-span-full rounded bg-green-600 py-2 text-white hover:bg-green-700">Add Item</button>
                     </form>
                 </div>
 

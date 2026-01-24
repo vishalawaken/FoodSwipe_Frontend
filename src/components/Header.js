@@ -107,9 +107,10 @@ const Header = () => {
                                 <Link href="/orders" className="hover:text-gray-900">Orders</Link>
                             </>)}
                             {/* RESTAURANT */}
-                            {user.role === "RESTAURANT" && (<Link href="/restaurant/dashboard/orders" className="hover:text-black">Restaurant Dashboard</Link>)}
+                            {user.role === "RESTAURANT" && (<Link href="/restaurant/dashboard/orders" className="hover:text-black">Restaurant Orders</Link>)}
+                             {user.role === "RESTAURANT" && (<Link href="/restaurant-dashboard" className="hover:text-black">Restaurant Dashboard</Link>)}
                             {/* ADMIN */}
-                            {user.role === "ADMIN" && (<Link href="/admin/dashboard" className="hover:text-black">Admin</Link>)}
+                            {user.role === "ADMIN" && (<Link href="/admin" className="hover:text-black">Admin</Link>)}
                             <button disabled={loading} onClick={handleLogout} className="hover:text-black">{loading ? "Logging Out..." : "Logout"}</button>
                         </>)}
                     </nav>

@@ -10,7 +10,7 @@ const Homepage = async () => {
   }
   return (
     <>
-      <div className="mx-auto max-w-7xl px-6 py-8">
+      <div className="mx-auto max-w-7xl px-6 py-8 ">
         <h1 className="mb-6 text-3xl font-bold text-gray-800">Restaurants Near You</h1>
         {restaurants.length === 0 ? (<p className="text-gray-500">No Restaurants Available Right Now</p>) : (<div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {restaurants.map((restaurant) => (<RestaurantCard key={restaurant._id} restaurant={restaurant}></RestaurantCard>))}

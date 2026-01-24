@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation"
 import Link from "next/link"
 
 import React from 'react'
+import Image from "next/image"
 
 const RegisterPage = () => {
   const router = useRouter();
@@ -80,7 +81,8 @@ const RegisterPage = () => {
   };
   return (
     <>
-      <div className="flex min-h-screen items-center justify-center bg-gray-50">
+      <div className="flex min-h-screen items-center justify-center bg-black/40">
+      <Image src="/register_bg.jpg" fill priority alt="background-image" className="object-cover -z-10"></Image>
         <div className="w-full max-w-md rounded-lg bg-white p-6 shadow">
           <h1 className="mb-6 text-center text-2xl font-bold trext-gray-800">
             Register

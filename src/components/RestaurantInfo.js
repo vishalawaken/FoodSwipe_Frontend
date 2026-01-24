@@ -2,11 +2,12 @@
 import axios from "axios"
 import Link from "next/link"
 import { useState } from "react"
-
+import { useRouter } from "next/navigation"
 
 const RestaurantInfo = ({ refresh, restaurant }) => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
+    const router = useRouter()
     const toggleStatus = async () => {
         setError("")
         try {
@@ -50,7 +51,8 @@ const RestaurantInfo = ({ refresh, restaurant }) => {
                     <button onClick={toggleStatus} disabled={loading || !restaurant.isApproved} className={`rounded px-4 py-2 text-sm text-white ${restaurant.isApproved ? "bg-blue-600 hover:bg-blue-700" : "cursor-not-allowed bg-gray-400"}`}>{
                         loading ? "Updating...." : restaurant.isOpen ? "Close Restaurant" : "Open Restaurant"
                     }</button>
-                    <Link href={`/restaurant-dashboard/menu/${restaurant._id}`}>Manage Menu</Link>
+                    <Link className="inline-block rounded bg-amber-300 px-4 py-2 text-sm font-medium text-black hover:bg-amber-400" href={`/restaurant-dashboard/menu/${restaurant._id}`}>Manage Menu</Link>
+
                 </div>
             </div>
         </>

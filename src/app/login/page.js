@@ -4,6 +4,7 @@ import { useState } from "react"
 import axios from "axios"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
+import Image from "next/image"
 
 
 
@@ -46,8 +47,9 @@ const LoginPage = () => {
     }
     return (
         <>
-            <div className="flex min-h-screen items-center justify-center bg-white">
-                <div className="w-full max-w-md rounded-lg bg-white p-6 shadow">
+            <div className="flex relative min-h-screen items-center justify-center bg-black/40">
+                <Image fill priority alt="background-image" src="/background_image.jpg" className="object-cover -z-10"></Image>
+                <div className="w-full z-10 max-w-md rounded-lg bg-white p-6 shadow">
                     <h1 className="mb-6 text-center text-2xl font-bold text-gray-800">Login</h1>
                     {error && (<p className="mb-4 text-sm text-red-400">{error}</p>)}
                     <form onSubmit={handleSubmit}>
