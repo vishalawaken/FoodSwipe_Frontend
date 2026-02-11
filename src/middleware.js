@@ -5,7 +5,7 @@ export async function middleware(req) {
 
   // Protected routes
   const protectedRoutes = [
-    "/cart",
+    // "/cart", // Removed - cart handles its own auth
     "/orders",
     "/restaurant-dashboard",
     "/admin",
@@ -88,10 +88,9 @@ export async function middleware(req) {
     );
   }
 
-  // 🔐 USER only
+  // 🔐 USER only (orders)
   if (
-    (pathname.startsWith("/cart") ||
-      pathname.startsWith("/orders")) &&
+    pathname.startsWith("/orders") &&
     user?.role !== "USER"
   ) {
     return NextResponse.redirect(
