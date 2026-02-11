@@ -36,11 +36,6 @@ const CartPage = () => {
             updateReduxCartCount(res.data.cart);
         } catch (error) {
             console.error("Error Fetching Cart", error);
-            // If unauthorized, redirect to login
-            if (error.response?.status === 401) {
-                router.push("/login");
-                return;
-            }
             setCart(null);
             dispatch(resetCart());
         } finally {

@@ -5,8 +5,8 @@ export async function middleware(req) {
 
   // Protected routes
   const protectedRoutes = [
-    // "/cart", // Removed - cart handles its own auth
-    // "/orders", // Removed - orders handles its own auth
+    "/cart",
+    "/orders",
     "/restaurant-dashboard",
     "/admin",
   ];
@@ -24,33 +24,20 @@ export async function middleware(req) {
 
   // 🔐 backend auth check
   try {
-    console.log("🔍 Middleware: Checking auth for:", pathname);
-    console.log("� API URL:", process.env.NEXT_PUBLIC_API_URL);
-    console.log("�🍪 Cookies:", req.headers.get("cookie"));
-
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/api/auth/me`,
       {
-        method: 'GET',
         headers: {
           cookie: req.headers.get("cookie") || "",
         },
-        credentials: 'include', // Important for cookies
-        cache: 'no-store', // Prevent caching
       }
     );
-
-    console.log("📡 Auth API Response Status:", res.status);
 
     if (res.ok) {
       const data = await res.json();
       user = data.user;
-      console.log("✅ User authenticated:", user?.email, "Role:", user?.role);
-    } else {
-      console.log("❌ Auth failed - Response not OK");
     }
   } catch (error) {
-    console.error("🚨 Middleware auth error:", error.message);
     user = null;
   }
 
@@ -88,6 +75,16 @@ export async function middleware(req) {
     );
   }
 
+  // 🔐 USER only
+  if (
+    (pathname.startsWith("/cart") ||
+      pathname.startsWith("/orders")) &&
+    user?.role !== "USER"
+  ) {
+    return NextResponse.redirect(
+      new URL("/", req.url)
+    );
+  }
 
   return NextResponse.next();
 }
