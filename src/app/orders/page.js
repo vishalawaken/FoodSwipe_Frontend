@@ -1,13 +1,15 @@
 "use client";
 
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
+import { useRouter } from "next/navigation";
 
 const UserOrdersPage = () => {
     const [orders, setOrders] = useState([]);
     const [loading, setLoading] = useState(true);
+    const router = useRouter();
 
-    const fetchOrders = async () => {
+    const fetchOrders = useCallback(async () => {
         try {
             const res = await axios.get(
                 `${process.env.NEXT_PUBLIC_API_URL}/api/order/my-orders`,
@@ -16,17 +18,22 @@ const UserOrdersPage = () => {
             setOrders(res.data.orders || []);
         } catch (error) {
             console.error("Failed to fetch user orders");
+            // If unauthorized, redirect to login
+            if (error.response?.status === 401) {
+                router.push("/login");
+                return;
+            }
         } finally {
             setLoading(false);
         }
-    };
+    }, [router]);
 
     useEffect(() => {
         fetchOrders();
 
         const interval = setInterval(fetchOrders, 10000); // 🔁 auto refresh
         return () => clearInterval(interval);
-    }, []);
+    }, [fetchOrders]);
 
     if (loading) return <p className="p-6">Loading orders...</p>;
 
